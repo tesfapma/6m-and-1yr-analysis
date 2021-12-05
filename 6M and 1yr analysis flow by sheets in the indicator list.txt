@@ -8,6 +8,17 @@ Sequence of sheets for analyses:
 7. Infant
 
 ****
-8. Continuum of care will be done only by tesf
+8. Continuum of care indicator will be done only by tesfa
+
+###########################################################################################
+###  the list of indicators included in the 6M techical report but not in the ET list #####
+###  of indicators                                                                    #####            
+###########################################################################################
+ 
+
+I have indicated the addition with purple text colors in the follwoing sheets:
+	1. FP-RH
+	2. Vaccination
+	3. Nutirtion
 
 
