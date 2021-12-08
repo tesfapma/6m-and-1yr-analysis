@@ -408,7 +408,7 @@ foreach var in SMcur_sideeff_lessbleed SMcur_sideeff_morebleed SMcur_sideeff_irr
 preserve
  local varlab : var label `var'
  
- tabout `var'[aw=SMFUweight] if SMresult==1 using "`COHORT'6M_Priority_indicator_Analysis$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title("Table 14. Fp side effect: `varlab' ") f(0 1) clab(n col_%) nwt(SMFUweight) sheet(FP_RH) location(`row' 1)
+ tabout `var'[aw=SMFUweight] if SMresult==1 using "`COHORT'6M_Priority_indicator_Analysis$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title("Table 18. Fp side effect: `varlab' ") f(0 1) clab(n col_%) nwt(SMFUweight) sheet(FP_RH) location(`row' 1)
  
  restore
  
@@ -475,7 +475,35 @@ tabout SMpartner_discussion_before [aw=SMFUweight] using "`COHORT'6M_Priority_in
 
 ******************************************************************************* 
 
- * table 1. Exclusive breastfeeding
+ * Table1. Exclusive breastfeeding
+ 
+gen exclusive_breastfeeding_baby1 =0 if SWstill_alive1==1 & SMresult==1
+replace exclusive_breastfeeding_baby1=1 if SMyl_breast_milk1==1 & SMyl_water1==0 & SMyl_unsweetjuice1==0& SMyl_sugar_juice1==0& SMyl_honey_juice1==0&SMyl_broth1==0 &SMyl_unsweetgruel1==0& SMyl_sugar_gruel1==0 & SMyl_honey_gruel1==0 & SMyl_sweetother1==0 &SMyl_unsweetother1==0& SMyl_unsweetfenugreek1==0& SMyl_sugar_fenugreek1==0& SMyl_honey_fenugreek1==0& SMyl_porridge1==0& SMyl_formula1==0 & SMyl_yogurt1==0 & SMyl_milk1==0 &SMfy_fort1==0& SMfy_grain1==0 & SMfy_bean1==0& SMfy_dairy1==0& SMfy_ylw_veg1==0& SMfy_wht_veg1==0& SMfy_grn_veg1==0& SMfy_ripe_frt1==0& SMfy_oth_frt_veg1==0 & SMfy_org1==0 & SMfy_meat1==0 & SMfy_egg1==0&  SMfy_fish1==0 & SMfy_other1==0
+
+label define exclusive_breastfeeding_baby_list 1"exclusive breastfeeding : yes" 0"exclusive breastfeeding : no" 
+
+label val exclusive_breastfeeding_baby1 exclusive_breastfeeding_baby_list
+label var exclusive_breastfeeding_baby1 "exclusive breastfeeding for baby 1"
+ 
+gen exclusive_breastfeeding_baby2 =0 if SWstill_alive2==1 & SMresult==1
+replace exclusive_breastfeeding_baby2=1 if SMyl_breast_milk2==1 & SMyl_water2==0 & SMyl_unsweetjuice2==0& SMyl_sugar_juice2==0& SMyl_honey_juice2==0&SMyl_broth2==0 &SMyl_unsweetgruel2==0& SMyl_sugar_gruel2==0 & SMyl_honey_gruel2==0 & SMyl_sweetother2==0 &SMyl_unsweetother2==0& SMyl_unsweetfenugreek2==0& SMyl_sugar_fenugreek2==0& SMyl_honey_fenugreek2==0& SMyl_porridge2==0& SMyl_formula2==0 & SMyl_yogurt2==0 & SMyl_milk2==0 &SMfy_fort2==0& SMfy_grain2==0 & SMfy_bean2==0& SMfy_dairy2==0& SMfy_ylw_veg2==0& SMfy_wht_veg2==0& SMfy_grn_veg2==0& SMfy_ripe_frt2==0& SMfy_oth_frt_veg2==0 & SMfy_org2==0 & SMfy_meat2==0 & SMfy_egg2==0&  SMfy_fish2==0 & SMfy_other2==0
+
+label define exclusive_breastfeeding_baby_list 1"exclusive breastfeeding : yes" 0"exclusive breastfeeding : no" 
+
+label val exclusive_breastfeeding_baby2 exclusive_breastfeeding_baby_list
+label var exclusive_breastfeeding_baby2 "exclusive breastfeeding for baby 2" 
+ 
+gen exclusive_breastfeeding_baby_all = 0 if exclusive_breastfeeding_baby1 !=. | exclusive_breastfeeding_baby2!=.
+replace exclusive_breastfeeding_baby_all=1 if exclusive_breastfeeding_baby1==1 | exclusive_breastfeeding_baby2==1
+label val exclusive_breastfeeding_baby_all exclusive_breastfeeding_baby_list
+label var exclusive_breastfeeding_baby_all "exclusive breastfeeding for all alive infants"
+
+tabout exclusive_breastfeeding_baby_all [aw=SMFUweight] using "`COHORT'6M_Priority_indicator_Analysis$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title("Table 1. The proportion of infants who were excludively breastfed at approximaltey six months of age") f(0 1) clab(n col_%) nwt(SMFUweight) sheet(Nutrition) location(1 1)
+
+
+
+
+
  
  
  
