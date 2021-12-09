@@ -287,17 +287,117 @@ tabout OYlack_food_frequency [aw=OYFUweight] if OYlack_food_4wks==1 using "`COHO
 *********************************************
 *   Sheet 5: PNC                            *
 *********************************************
+*Table 1:  Percentage of women who visited a professional health worker for care themselves or their babies in the past 6 months
+recode OYhealth_check_6m_yn(-88=0)
+tabout OYhealth_check_6m_yn [aw=OYFUweight]  using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table 1: Percentage of women who visited a professional health worker for care themselves or their babies in the past 6 months) f(0 1) clab(n col_%) nwt(OYFUweight) sheet(PNC) location(1 1)
 
+*Table 2: Percentage of women who have been visited by a professional health worker for care themselves or their babies in the past 6 months
+tabout OYcheck_you_6m_yn [aw=OYFUweight]  using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table 2: Percentage of women who have been visited by a professional health worker for care themselves or their babies in the past 6 months ) f(0 1) clab(n col_%) nwt(OYFUweight) sheet(PNC) location(8 1)
 
+*Table 3: Proportion of women who were counselled on diversified feeding (giving a variety of foods when the baby starts feeding after 6 months) by HEW or other professional health care provider at any health check point in the past 6 months
 
+tabout OYfood_variety [aw=OYFUweight]  using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table 3: Proportion of women who were counselled on diversified feeding  by HEW or other professionals ) f(0 1) clab(n col_%) nwt(OYFUweight) sheet(PNC) location(16 1)
 
+*Table 4: Proportion of women who were counselled on feeding animal source foods by HEW or other professional health care provider at any health check point in the past 6 months
 
+tabout OYanimal_foods [aw=OYFUweight]  using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table 4: Proportion of women who were counselled on feeding animal source foods by HEW or other professionals ) f(0 1) clab(n col_%) nwt(OYFUweight) sheet(PNC) location(24 1)
 
+*Table 5: Proportion of women who were counselled on frequency of feeding by HEW or other professional health care provider at any health check point in the past 6 months
+
+tabout OYfood_frequency [aw=OYFUweight]  using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table 5:Proportion of women who were counselled on frequency of feeding by HEW or other professional ) f(0 1) clab(n col_%) nwt(OYFUweight) sheet(PNC) location(32 1)
+*Table 6: Proportion of women who were counselled on not to feed sugar-sweetened beverages by HEW or other professional health care provider at any health check point in the past 6 months 
+
+tabout OYavoid_sugary_drinks [aw=OYFUweight]  using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table 6: Proportion of women who were counselled on not to feed sugar-sweetened beverages by HEW or other professional) f(0 1) clab(n col_%) nwt(OYFUweight) sheet(PNC) location(40 1)
+
+*Table 7: Percentage of women whose baby's weight was measured by any health care provider at any health check in the past 6 months
+tabout OYmeasure_weight [aw=OYFUweight]  using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table 7: Percentage of women whose baby's weight was measured by any health care provider at any health check in the past 6 months) f(0 1) clab(n col_%) nwt(OYFUweight) sheet(PNC) location(48 1)
+
+*Table 8:Percentage of women whose baby's length was measured by any health care provider at any health check in the past 6 months
+recode OYmeasure_height (-88=0)
+tabout OYmeasure_height [aw=OYFUweight]  using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table 8:Percentage of women whose baby's length was measured by any health care provider at any health check in the past 6 months) f(0 1) clab(n col_%) nwt(OYFUweight) sheet(PNC) location(56 1)
+
+*Table 9: Percentage of women whose baby's upper arm circumference was measured by any health care provider at any health check in the past 6 months
+recode OYmeasure_muac (-88=0)
+tabout OYmeasure_muac [aw=OYFUweight]  using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table 9:Percentage of women whose baby's upper arm circumference was measured by any health care provider at any health check in the past 6 months) f(0 1) clab(n col_%) nwt(OYFUweight) sheet(PNC) location(64 1)
+
+*Table 10: Percenage of women who receive any family planning information, referrals or services, not including immunization visits at any health checks in the past 6 months for themselves or their babies
+recode OYfp_info_non_vaccine_visit_6m(-88=0)
+tabout OYfp_info_non_vaccine_visit_6m [aw=OYFUweight]  using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table 10: Percenage of women who receive any family planning information, referrals or services, not including immunization visits) f(0 1) clab(n col_%) nwt(OYFUweight) sheet(PNC) location(72 1)
+
+*Table 11: Percenage of women who receive any family planning information, referrals or services during any of immunization visits for their babies
+tabout OYfp_info_vaccine_visit_6m [aw=OYFUweight]  using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table 11: Percenage of women who receive any family planning information, referrals or services during any of immunization visits for their babies) f(0 1) clab(n col_%) nwt(OYFUweight) sheet(PNC) location(80 1)
 
 
 *********************************************
-*   Sheet 6: Deleviry                       *
+*   Sheet 6: Delivery                       *
 *********************************************
+
+* First reshape the data
+preserve
+keep if OYresult==1|OYresult==2 
+
+unab kid_var : OYgender1-OYnocard_vit_a_yn1
+local stubs: subinstr local kid_var "1" "", all
+local stubs: subinstr local stubs "OYpolio_" "OYpolio1_", all
+local stubs: subinstr local stubs "OYpentavalent_" "OYpentavalent1_", all
+local stubs: subinstr local stubs "OYpcv_" "OYpcv1_", all
+local stubs: subinstr local stubs "OYrota_" "OYrota1_", all
+local stubs: subinstr local stubs "OYmeasles_" "OYmeasles1_", all
+gen mother_ID=OYmetainstanceID
+foreach var in `kid_var' {
+local `var'l : variable label `var'
+}
+reshape long `stubs', i(mother_ID) j(index)
+
+*Table 1: Birth outcome pregnancy type
+tabout OYpregnancy_type[aw=OYFUweight]  using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table 1: Birth outcome pregnancy type) f(0 1) clab(n col_%) nwt(OYFUweight) sheet(Delivery) location(1 1)
+
+*Table 2:Birth outcome gender
+tabout OYgender[aw=OYFUweight]  using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table 2: Birth outcome gender) f(0 1) clab(n col_%) nwt(OYFUweight) sheet(Delivery) location(8 1)
+
+*Table 3: The proportion of live births
+tabout OYstill_alive[aw=OYFUweight]  using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table 3: The proportion of live births) f(0 1) clab(n col_%) nwt(OYFUweight) sheet(Delivery) location(16 1)
+
+*Table 4: The proporton of births registered in the CRVS system
+tabout OYbirth_registered[aw=OYFUweight]  using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table 4: The proporton of births registered in the CRVS system) f(0 1) clab(n col_%) nwt(OYFUweight) sheet(Delivery) location(24 1)
+*Table 5: Exactly how old  the child when (he/she) died?
+tabout OYage_at_death_units[aw=OYFUweight]  using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table 5: Exactly how old  the child when (he/she) died?) f(0 1) clab(n col_%) nwt(OYFUweight) sheet(Delivery) location(32 1)
+
+*Table 6: The proportion of babies who died at home
+recode OYwhere_died (3 4 5 =16), gen(deid_home)
+label define deid_homelist 1 "Deid at home" 16 "Other place"
+label val deid_home deid_homelist
+
+tabout deid_home[aw=OYFUweight]  using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table 6: The proportion of babies who died at home) f(0 1) clab(n col_%) nwt(OYFUweight) sheet(Delivery) location(40 1)
+
+*Table 7: The proprotion of babies' death registered in the CRVS system
+tabout OYdeath_registered[aw=OYFUweight]  using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table 7: The proprotion of babies' death registered in the CRVS system) f(0 1) clab(n col_%) nwt(OYFUweight) sheet(Delivery) location(48 1)
+
+*Table 8: The proportion of deceased babies who suffered from any injury or accident
+tabout OYaccident_yn[aw=OYFUweight]  using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table 8: The proportion of deceased babies who suffered from any injury or accident) f(0 1) clab(n col_%) nwt(OYFUweight) sheet(Delivery) location(56 1)
+
+/*
+*Table 9: The types of injury which led to the death of the baby 
+    * No case
+tabout OYaccident_type[aw=OYFUweight]  using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table 9: The types of injury which led to the death of the baby) f(0 1) clab(n col_%) nwt(OYFUweight) sheet(Delivery) location(64 1)
+*/
+
+*Table 9: The proportion of babies who suffered from the listed symptioms before death 
+local i=64
+foreach var in  OYsymptoms_poorfeed OYsymptoms_eyeinfect OYsymptoms_skinles OYsymptoms_convusle OYsymptoms_lethargy OYsymptoms_unconsc OYsymptoms_fever OYsymptoms_cough OYsymptoms_sorethrt OYsymptoms_fastbreath OYsymptoms_difbreath OYsymptoms_diarrhea OYsymptoms_vomit OYsymptoms_nostool OYsymptoms_swelling OYsymptoms_other {
+	local `var' : variable label `var'
+	tabout `var' [aw=OYFUweight] using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table X: `"`: var label `var''"') f(0 1) clab(n col_%) nwt(OYFUweight) sheet(Delivery) location(`i' 1)
+local i=`i'+7
+	}	
+
+*Table 10: The proportion women who perceived the listed symptoms as a cause for the death of her baby
+local i=176
+foreach var in  OYcause_of_death_premie OYcause_of_death_delivery OYcause_of_death_sids OYcause_of_death_tetanus OYcause_of_death_malaria OYcause_of_death_pneumonia OYcause_of_death_measles OYcause_of_death_cough OYcause_of_death_giOYcause_of_death_malnut OYcause_of_death_meningitis OYcause_of_death_hep OYcause_of_death_typhus OYcause_of_death_tb OYcause_of_death_aids OYcause_of_death_unknown OYcause_of_death_negligence OYcause_of_death_evileye OYcause_of_death_coronavirus OYcause_of_death_other  {
+	local `var' : variable label `var'
+	tabout `var' [aw=OYFUweight] using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table X: `"`: var label `var''"') f(0 1) clab(n col_%) nwt(OYFUweight) sheet(Delivery) location(`i' 1)
+local i=`i'+7
+	}	
+
 
 
 
