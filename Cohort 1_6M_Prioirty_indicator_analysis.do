@@ -431,22 +431,22 @@ label var SMmensus_resumedsex " women whose menses returned and who have resumed
  
  *Table 20. The proportion of women who jointy decided with her husband/partner to use famliy planning method 
  
- gen fp_use_jointdecision = 0 if SMcurrent_user==1
- replace fp_use_jointdecision=1 if fp_use_jointdecision==3
+ gen SMfpuse_jointdecision = 0 if SMcurrent_user==1
+ replace SMfpuse_jointdecision=1 if SMfp_use_jointdecision==3
  label define fp_use_jointdecision_list 1"joint decision:yes" 0 "Joint Decision:no"
-label val fp_use_jointdecision fp_use_jointdecision_list
-label var fp_use_jointdecision " women who jointly decuided with her partner to use current Family planning"
-tabout fp_use_jointdecision [aw=SMFUweight] using "`COHORT'6M_Priority_indicator_Analysis$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title("Table 20. The proportion of women who jointy decided with her husband/partner to use famliy planning method") f(0 1) clab(n col_%) nwt(SMFUweight) sheet(FP_RH) location(400 1)
+label val SMfpuse_jointdecision fp_use_jointdecision_list
+label var SMfpuse_jointdecision " women who jointly decuided with her partner to use current Family planning"
+tabout SMfpuse_jointdecision [aw=SMFUweight] using "`COHORT'6M_Priority_indicator_Analysis$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title("Table 20. The proportion of women who jointy decided with her husband/partner to use famliy planning method") f(0 1) clab(n col_%) nwt(SMFUweight) sheet(FP_RH) location(400 1)
 
 
 *Table 21. The proportion of women who jointy decided with her husband/partner to not use famliy planning method 
  
- gen fp_notuse_jointdecision = 0 if SMcurrent_user==1
- replace fp_notuse_jointdecision=1 if SMwhy_not_decision==3
+ gen SMfp_notuse_jointdecision = 0 if SMcurrent_user==1
+ replace SMfp_notuse_jointdecision=1 if SMwhy_not_decision==3
  label define fp_notuse_jointdecision_list 1"joint decision:yes" 0 "Joint Decision:no"
-label val fp_notuse_jointdecision fp_notuse_jointdecision_list
-label var fp_notuse_jointdecision " women who jointly decuided with her partner to not use current Family planning"
-tabout fp_notuse_jointdecision [aw=SMFUweight] using "`COHORT'6M_Priority_indicator_Analysis$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title("Table 21. The proportion of women who jointy decided with her husband/partner to not use famliy planning method") f(0 1) clab(n col_%) nwt(SMFUweight) sheet(FP_RH) location(410 1)
+label val SMfp_notuse_jointdecision fp_notuse_jointdecision_list
+label var SMfp_notuse_jointdecision " women who jointly decuided with her partner to not use current Family planning"
+tabout SMfp_notuse_jointdecision [aw=SMFUweight] using "`COHORT'6M_Priority_indicator_Analysis$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title("Table 21. The proportion of women who jointy decided with her husband/partner to not use famliy planning method") f(0 1) clab(n col_%) nwt(SMFUweight) sheet(FP_RH) location(410 1)
 
 *Table 22. The proportion of women who discussed with her husband/partner to aviod or delay pregnancy
 
@@ -477,61 +477,184 @@ tabout SMpartner_discussion_before [aw=SMFUweight] using "`COHORT'6M_Priority_in
 
  * Table1. Exclusive breastfeeding
  
-gen exclusive_breastfeeding_baby1 =0 if SWstill_alive1==1 & SMresult==1
-replace exclusive_breastfeeding_baby1=1 if SMyl_breast_milk1==1 & SMyl_water1==0 & SMyl_unsweetjuice1==0& SMyl_sugar_juice1==0& SMyl_honey_juice1==0&SMyl_broth1==0 &SMyl_unsweetgruel1==0& SMyl_sugar_gruel1==0 & SMyl_honey_gruel1==0 & SMyl_sweetother1==0 &SMyl_unsweetother1==0& SMyl_unsweetfenugreek1==0& SMyl_sugar_fenugreek1==0& SMyl_honey_fenugreek1==0& SMyl_porridge1==0& SMyl_formula1==0 & SMyl_yogurt1==0 & SMyl_milk1==0 &SMfy_fort1==0& SMfy_grain1==0 & SMfy_bean1==0& SMfy_dairy1==0& SMfy_ylw_veg1==0& SMfy_wht_veg1==0& SMfy_grn_veg1==0& SMfy_ripe_frt1==0& SMfy_oth_frt_veg1==0 & SMfy_org1==0 & SMfy_meat1==0 & SMfy_egg1==0&  SMfy_fish1==0 & SMfy_other1==0
+gen exclusive_breastfeeding_baby1 =0 if SMstill_alive1==1 & SMresult==1
+replace exclusive_breastfeeding_baby1=1 if SMyl_breast_milk1==1 & SMyl_water1==0 & SMyl_unsweetjuice1==0& SMyl_sugar_juice1==0& SMyl_honey_juice1==0&SMyl_broth1==0 & SMyl_honey_tea1==0 & SMyl_sugar_tea1==0 & SMyl_unsweettea1==0 & SMyl_unsweetgruel1==0& SMyl_sugar_gruel1==0 & SMyl_honey_gruel1==0 & SMyl_sweetother1==0 &SMyl_unsweetother1==0& SMyl_unsweetfenugreek1==0& SMyl_sugar_fenugreek1==0& SMyl_honey_fenugreek1==0& SMyl_porridge1==0& SMyl_formula1==0 & SMyl_yogurt1==0 & SMyl_milk1==0 &SMfy_fort1==0& SMfy_grain1==0 & SMfy_bean1==0& SMfy_dairy1==0& SMfy_ylw_veg1==0& SMfy_wht_veg1==0& SMfy_grn_veg1==0& SMfy_ripe_frt1==0 & SMfy_oth_frt_veg1==0 & SMfy_org1==0 & SMfy_meat1==0 & SMfy_egg1==0&  SMfy_fish1==0 & SMfy_other1==0
 
-label define exclusive_breastfeeding_baby_list 1"exclusive breastfeeding : yes" 0"exclusive breastfeeding : no" 
+label define exclu_breastfeeding_baby_list 1 "exclusive breastfeeding : yes" 0 "exclusive breastfeeding : no" 
 
-label val exclusive_breastfeeding_baby1 exclusive_breastfeeding_baby_list
+label val exclusive_breastfeeding_baby1 exclu_breastfeeding_baby_list
 label var exclusive_breastfeeding_baby1 "exclusive breastfeeding for baby 1"
  
-gen exclusive_breastfeeding_baby2 =0 if SWstill_alive2==1 & SMresult==1
-replace exclusive_breastfeeding_baby2=1 if SMyl_breast_milk2==1 & SMyl_water2==0 & SMyl_unsweetjuice2==0& SMyl_sugar_juice2==0& SMyl_honey_juice2==0&SMyl_broth2==0 &SMyl_unsweetgruel2==0& SMyl_sugar_gruel2==0 & SMyl_honey_gruel2==0 & SMyl_sweetother2==0 &SMyl_unsweetother2==0& SMyl_unsweetfenugreek2==0& SMyl_sugar_fenugreek2==0& SMyl_honey_fenugreek2==0& SMyl_porridge2==0& SMyl_formula2==0 & SMyl_yogurt2==0 & SMyl_milk2==0 &SMfy_fort2==0& SMfy_grain2==0 & SMfy_bean2==0& SMfy_dairy2==0& SMfy_ylw_veg2==0& SMfy_wht_veg2==0& SMfy_grn_veg2==0& SMfy_ripe_frt2==0& SMfy_oth_frt_veg2==0 & SMfy_org2==0 & SMfy_meat2==0 & SMfy_egg2==0&  SMfy_fish2==0 & SMfy_other2==0
+gen exclusive_breastfeeding_baby2 =0 if SMstill_alive2==1 & SMresult==1
+replace exclusive_breastfeeding_baby2=1 if SMyl_breast_milk2==1 & SMyl_water2==0 & SMyl_unsweetjuice2==0& SMyl_sugar_juice2==0& SMyl_honey_juice2==0&SMyl_broth2==0 & SMyl_honey_tea2==0 & SMyl_sugar_tea2==0 & SMyl_unsweettea2==0 &SMyl_unsweetgruel2==0& SMyl_sugar_gruel2==0 & SMyl_honey_gruel2==0 & SMyl_sweetother2==0 &SMyl_unsweetother2==0& SMyl_unsweetfenugreek2==0& SMyl_sugar_fenugreek2==0& SMyl_honey_fenugreek2==0& SMyl_porridge2==0& SMyl_formula2==0 & SMyl_yogurt2==0 & SMyl_milk2==0 &SMfy_fort2==0& SMfy_grain2==0 & SMfy_bean2==0& SMfy_dairy2==0& SMfy_ylw_veg2==0& SMfy_wht_veg2==0& SMfy_grn_veg2==0& SMfy_ripe_frt2==0& SMfy_oth_frt_veg2==0 & SMfy_org2==0 & SMfy_meat2==0 & SMfy_egg2==0&  SMfy_fish2==0 & SMfy_other2==0
 
-label define exclusive_breastfeeding_baby_list 1"exclusive breastfeeding : yes" 0"exclusive breastfeeding : no" 
-
-label val exclusive_breastfeeding_baby2 exclusive_breastfeeding_baby_list
+label val exclusive_breastfeeding_baby2 exclu_breastfeeding_baby_list
 label var exclusive_breastfeeding_baby2 "exclusive breastfeeding for baby 2" 
  
 gen exclusive_breastfeeding_baby_all = 0 if exclusive_breastfeeding_baby1 !=. | exclusive_breastfeeding_baby2!=.
 replace exclusive_breastfeeding_baby_all=1 if exclusive_breastfeeding_baby1==1 | exclusive_breastfeeding_baby2==1
-label val exclusive_breastfeeding_baby_all exclusive_breastfeeding_baby_list
+label val exclusive_breastfeeding_baby_all exclu_breastfeeding_baby_list
 label var exclusive_breastfeeding_baby_all "exclusive breastfeeding for all alive infants"
 
 tabout exclusive_breastfeeding_baby_all [aw=SMFUweight] using "`COHORT'6M_Priority_indicator_Analysis$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title("Table 1. The proportion of infants who were excludively breastfed at approximaltey six months of age") f(0 1) clab(n col_%) nwt(SMFUweight) sheet(Nutrition) location(1 1)
 
 
+* table 2. partially breastfed 
+
+gen partial_breastfeeding_baby1 =0 if SMstill_alive1==1 & SMresult==1
+replace partial_breastfeeding_baby1=1 if SMyl_breast_milk1==1 & (SMyl_water1==1 | SMyl_unsweetjuice1==1 | SMyl_sugar_juice1==1 | SMyl_honey_juice1==1 | SMyl_broth1==1 | SMyl_honey_tea1==1 | SMyl_sugar_tea1==1 | SMyl_unsweettea1==1 | SMyl_unsweetgruel1==1 | SMyl_sugar_gruel1==1 | SMyl_honey_gruel1==1 | SMyl_sweetother1==1 | SMyl_unsweetother1==1) & SMyl_unsweetfenugreek1==0 & SMyl_sugar_fenugreek1==0 & SMyl_honey_fenugreek1==0 & SMyl_porridge1==0 & SMyl_formula1==0 & SMyl_yogurt1==0 & SMyl_milk1==0 &SMfy_fort1==0 & SMfy_grain1==0 & SMfy_bean1==0 & SMfy_dairy1==0 & SMfy_ylw_veg1==0 & SMfy_wht_veg1==0 & SMfy_grn_veg1==0 & SMfy_ripe_frt1==0 & SMfy_oth_frt_veg1==0 & SMfy_org1==0 & SMfy_meat1==0 & SMfy_egg1==0 &  SMfy_fish1==0 & SMfy_other1==0
+
+label define partial_breastfeeding_baby_list 1"partial breastfeeding : yes" 0"partial breastfeeding : no" 
+
+label val partial_breastfeeding_baby1 partial_breastfeeding_baby_list
+label var partial_breastfeeding_baby1 "partial breastfeeding for baby 1"
+
+gen partial_breastfeeding_baby2 =0 if SMstill_alive2==1 & SMresult==1
+replace partial_breastfeeding_baby2=1 if SMyl_breast_milk2==1 & (SMyl_water2==1 | SMyl_unsweetjuice2==1 | SMyl_sugar_juice2==1 | SMyl_honey_juice2==1 | SMyl_broth2==1 | SMyl_honey_tea2==1 | SMyl_sugar_tea2==1 | SMyl_unsweettea2==1 | SMyl_unsweetgruel2==1 | SMyl_sugar_gruel2==1 | SMyl_honey_gruel2==1 | SMyl_sweetother2==1 | SMyl_unsweetother2==1) & SMyl_unsweetfenugreek2==0 & SMyl_sugar_fenugreek2==0 & SMyl_honey_fenugreek2==0 & SMyl_porridge2==0 & SMyl_formula2==0 & SMyl_yogurt2==0 & SMyl_milk2==0 &SMfy_fort2==0 & SMfy_grain2==0 & SMfy_bean2==0 & SMfy_dairy2==0 & SMfy_ylw_veg2==0 & SMfy_wht_veg2==0 & SMfy_grn_veg2==0 & SMfy_ripe_frt2==0 & SMfy_oth_frt_veg2==0 & SMfy_org2==0 & SMfy_meat2==0 & SMfy_egg2==0 &  SMfy_fish2==0 & SMfy_other2==0
+
+label val partial_breastfeeding_baby1 partial_breastfeeding_baby_list
+label var partial_breastfeeding_baby1 "partial breastfeeding for baby 2"
+
+gen partial_breastfeeding_baby_all = 0 if partial_breastfeeding_baby1 !=. | partial_breastfeeding_baby2!=.
+replace partial_breastfeeding_baby_all=1 if partial_breastfeeding_baby1==1 | partial_breastfeeding_baby2==1
+label val partial_breastfeeding_baby_all partial_breastfeeding_baby_list
+label var partial_breastfeeding_baby_all "partial breastfeeding for all alive infants"
 
 
+tabout partial_breastfeeding_baby_all [aw=SMFUweight] using "`COHORT'6M_Priority_indicator_Analysis$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title("Table 2. The proportion of infants who were partially breastfed at approximaltey six months of age") f(0 1) clab(n col_%) nwt(SMFUweight) sheet(Nutrition) location(10 1)
 
+* table 3 predominantly breastfed 
+
+gen predominantly_breastfed_baby1 =0 if SMstill_alive1==1 & SMresult==1
+replace predominantly_breastfed_baby1=1 if SMyl_breast_milk1==1 & (SMyl_water1==1 | SMyl_unsweetjuice1==1 | SMyl_sugar_juice1==1 | SMyl_honey_juice1==1 | SMyl_broth1==1 | SMyl_honey_tea1==1 | SMyl_sugar_tea1==1 | SMyl_unsweettea1==1 | SMyl_unsweetgruel1==1 | SMyl_sugar_gruel1==1 | SMyl_honey_gruel1==1 | SMyl_sweetother1==1 | SMyl_unsweetother1==1 | SMyl_unsweetfenugreek1==1 | SMyl_sugar_fenugreek1==1 | SMyl_honey_fenugreek1==1 | SMyl_formula1==1 | SMyl_yogurt1==1 | SMyl_milk1==1) & SMyl_porridge1==0 & SMfy_fort1==0 & SMfy_grain1==0 & SMfy_bean1==0 & SMfy_dairy1==0 & SMfy_ylw_veg1==0 & SMfy_wht_veg1==0 & SMfy_grn_veg1==0 & SMfy_ripe_frt1==0 & SMfy_oth_frt_veg1==0 & SMfy_org1==0 & SMfy_meat1==0 & SMfy_egg1==0 &  SMfy_fish1==0 & SMfy_other1==0
+
+label define predom_breastfed_baby_list 1"predominantly breastfeeding : yes" 0"predominantly breastfeeding : no" 
+
+label val predominantly_breastfed_baby1 predom_breastfed_baby_list
+label var predominantly_breastfed_baby1 "predominant breastfeeding for baby 1"
+
+gen predominantly_breastfed_baby2 =0 if SMstill_alive2==1 & SMresult==1
+replace predominantly_breastfed_baby2=1 if SMyl_breast_milk2==1 & (SMyl_water2==1 | SMyl_unsweetjuice2==1 | SMyl_sugar_juice2==1 | SMyl_honey_juice2==1 | SMyl_broth2==1 | SMyl_honey_tea2==1 | SMyl_sugar_tea2==1 | SMyl_unsweettea2==1 | SMyl_unsweetgruel2==1 | SMyl_sugar_gruel2==1 | SMyl_honey_gruel2==1 | SMyl_sweetother2==1 | SMyl_unsweetother2==1 | SMyl_unsweetfenugreek2==1 | SMyl_sugar_fenugreek2==1 | SMyl_honey_fenugreek2==1 | SMyl_formula2==1 | SMyl_yogurt2==1 | SMyl_milk2==1) & SMyl_porridge2==0 & SMfy_fort2==0 & SMfy_grain2==0 & SMfy_bean2==0 & SMfy_dairy2==0 & SMfy_ylw_veg2==0 & SMfy_wht_veg2==0 & SMfy_grn_veg2==0 & SMfy_ripe_frt2==0 & SMfy_oth_frt_veg2==0 & SMfy_org2==0 & SMfy_meat2==0 & SMfy_egg2==0 &  SMfy_fish2==0 & SMfy_other2==0
+
+
+label val predominantly_breastfed_baby2 predom_breastfed_baby_list
+label var predominantly_breastfed_baby2 "predominant breastfeeding for baby 2"
+
+gen predom_breastfeeding_baby_all = 0 if predominantly_breastfed_baby1 !=. | predominantly_breastfed_baby2!=.
+replace predom_breastfeeding_baby_all=1 if predominantly_breastfed_baby1==1 | predominantly_breastfed_baby2==1
+label val predom_breastfeeding_baby_all predom_breastfed_baby_list
+label var predom_breastfeeding_baby_all "ppredominantly breastfed for all alive infants"
+
+tabout predom_breastfeeding_baby_all [aw=SMFUweight] using "`COHORT'6M_Priority_indicator_Analysis$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title("Table 3. The proportion of infants who were predominantly breastfed at approximaltey six months of age") f(0 1) clab(n col_%) nwt(SMFUweight) sheet(Nutrition) location(20 1)
+
+* Table 4. Not breastfed
+  
+ gen SMbreastfeeding_all= 0 if SMstill_alive1==1 | SMstill_alive2==1
+ replace SMbreastfeeding_all=1 if SMyl_breast_milk1==1 | SMyl_breast_milk2==1 
+ label define SMbreastfeeding_all_list 1 "breastfeeding_all: yes" 0 "breastfeeding_all: No" 
+ label value SMbreastfeeding_all SMbreastfeeding_all_list 
+ label var SMbreastfeeding_all "proportion of infants who were not breastfed" 
  
- 
- 
+tabout SMbreastfeeding_all [aw=SMFUweight] using "`COHORT'6M_Priority_indicator_Analysis$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title("Table 4. The proportion of infants who were not breastfed at approximaltey six months of age") f(0 1) clab(n col_%) nwt(SMFUweight) sheet(Nutrition) location(30 1)
+
+* Table 5. The proportion of  infants who are approximaltey 6 months of age who received grain, roots and tuber food groups during the previous day
+
+gen SMgrain_roots_tuber =0 if SMstill_alive1==1 | SMstill_alive2==1 & SMresult==1
+replace SMgrain_roots_tuber=1 if SMfy_wht_veg1==1 | SMyl_unsweetgruel1==1| SMyl_unsweetfenugreek1==1| SMyl_sugar_gruel1==1 | SMyl_honey_gruel1==1 | SMyl_sugar_fenugreek1==1 | SMyl_honey_fenugreek1==1 | SMfy_grain1 SMfy_fort1==1 | SMfy_wht_veg2==1 | SMyl_unsweetgruel2==1| SMyl_unsweetfenugreek2==1| SMyl_sugar_gruel2==1 | SMyl_honey_gruel2==1 | SMyl_sugar_fenugreek2==1 | SMyl_honey_fenugreek2==1 | SMfy_grain1 SMfy_fort2==1
+
+label define SMgrain_roots_tuber_list 1 "comsumed Grain, roots and tuber food group:yes" 0 " comsumed Grain, roots and tuber food group:no" 
+
+label val SMgrain_roots_tuber SMgrain_roots_tuber_list
+label var SMgrain_roots_tuber "infants who consumed Grain, roots and tuber food group"
+
+tabout SMgrain_roots_tuber [aw=SMFUweight] using "`COHORT'6M_Priority_indicator_Analysis$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title("Table 5. The proportion of  infants who are approximaltey 6 months of age who received grain, roots and tuber food groups during the previous day") f(0 1) clab(n col_%) nwt(SMFUweight) sheet(Nutrition) location(40 1)
+
+* Table 6. The proportion of  infants who are approximaltey 6 months of age who received Legumes and nut food group during the previous day
+
+gen SMlegumes_nut =0 if SMstill_alive1==1 | SMstill_alive2==1 & SMresult==1
+replace SMlegumes_nut=1 if SMfy_bean1==1 | SMfy_bean2==1
+label define SMlegumes_nut_list 1 " consumed Legumes and nut food group:yes" 0 " consumed Legumes and nut food group:no"
+
+label val SMlegumes_nut SMlegumes_nut_list
+label var SMlegumes_nut "infants who consumed legumes and nut food group"
+
+tabout SMlegumes_nut [aw=SMFUweight] using "`COHORT'6M_Priority_indicator_Analysis$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title("Table 6. The proportion of  infants who are approximaltey 6 months of age who received Legumes and nut food groups during the previous day") f(0 1) clab(n col_%) nwt(SMFUweight) sheet(Nutrition) location(50 1)
 
 
+* Table 7. The proportion of  infants who are approximaltey 6 months of age who received Dairy products food group during the previous day 
 
- 
+gen SMdiary =0 if SMstill_alive1==1 | SMstill_alive2==1 & SMresult==1
+replace SMdiary=1 if SMyl_milk1==1| SMyl_formula1==1 | SMyl_yogurt1==1| SMfy_dairy1==1 | SMfy_fort1==1 |SMyl_milk2==1| SMyl_formula2==1 | SMyl_yogurt2==1| SMfy_dairy2==1 | SMfy_fort2==1 
 
+label define SMdiary_list 1 " consumed diary food group:yes" 0 " consumed diary food group:no"
+label val SMdiary SMdiary_list 
+label var SMdiary "infants who consumed diary food group"
 
-
- 
- 
-
-
-
-
-
+tabout SMdiary [aw=SMFUweight] using "`COHORT'6M_Priority_indicator_Analysis$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title("Table 7. The proportion of  infants who are approximaltey 6 months of age who received Dairy products during the previous day") f(0 1) clab(n col_%) nwt(SMFUweight) sheet(Nutrition) location(60 1)
 
 
+* Table 8. The proportion of  infants who are approximaltey 6 months of age who received Flesh foods food group during the previous day 
+
+gen SMflesh_food =0 if SMstill_alive1==1 | SMstill_alive2==1 & SMresult==1
+replace SMflesh_food=1 if SMfy_fish1==1 | SMfy_org1==1 | SMfy_meat1==1 | SMfy_fish2==1 | SMfy_org2==1 | SMfy_meat2==1
+
+label define SMflesh_food_list 1 " consumed flesh food group:yes" 0 " consumed flesh food group:no"
+label val SMflesh_food SMflesh_food_list 
+label var SMflesh_food "infants who consumed flesh food group"
+
+tabout SMflesh_food [aw=SMFUweight] using "`COHORT'6M_Priority_indicator_Analysis$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title("table 8. The proportion of  infants who are approximaltey 6 months of age who received Dairy products during the previous day") f(0 1) clab(n col_%) nwt(SMFUweight) sheet(Nutrition) location(70 1)
+
+* Table 9. The proportion of  infants who are approximaltey 6 months of age who received eggs during the previous day 
+
+gen SMeggs =0 if SMstill_alive1==1 | SMstill_alive2==1 & SMresult==1
+replace SMeggs=1 if SMfy_egg1==1 | SMfy_egg2==1
+label define SMeggs_list 1 " consumed eggs :yes" 0 "consumed eggs :no"
+label val SMeggs SMeggs_list 
+label var SMeggs "infants who consumed eggs"
+
+tabout SMeggs [aw=SMFUweight] using "`COHORT'6M_Priority_indicator_Analysis$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title("table 9. The proportion of  infants who are approximaltey 6 months of age who received eggs during the previous day") f(0 1) clab(n col_%) nwt(SMFUweight) sheet(Nutrition) location(80 1)
 
 
+* Table 9. The proportion of  infants who are approximaltey 6 months of age who received Vitamin-A rich fruits during the previous day 
+
+gen SMvitaminA_rich_fruits =0 if SMstill_alive1==1 | SMstill_alive2==1 & SMresult==1
+replace SMvitaminA_rich_fruits=1 if SMfy_ylw_veg1==1 | SMfy_grn_veg1==1 | SMfy_ripe_frt1==1 |SMfy_ylw_veg2==1 | SMfy_grn_veg2==1 | SMfy_ripe_frt2==1 
+
+label define SMvitaminA_rich_fruits_list 1 " consumed vitamin-A rich fruits :yes" 0 "consumed vitamin-A rich fruits:no"
+label val SMvitaminA_rich_fruits SMvitaminA_rich_fruits_list 
+label var SMvitaminA_rich_fruits "infants who consumed vitamin-A rich fruits"
+
+tabout SMvitaminA_rich_fruits [aw=SMFUweight] using "`COHORT'6M_Priority_indicator_Analysis$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title("Table 10. The proportion of  infants who are approximaltey 6 months of age who received vitaminA_rich_fruits during the previous day") f(0 1) clab(n col_%) nwt(SMFUweight) sheet(Nutrition) location(90 1)
+
+* Table 10. The proportion of  infants who are approximaltey 6 months of age who received other fruits or vegetables during the previous day 
+
+gen SMother_fru_veg =0 if SMstill_alive1==1 | SMstill_alive2==1 & SMresult==1
+replace SMother_fru_veg=1 if SMfy_oth_frt_veg1==1 |SMfy_oth_frt_veg2==1
+label define SMother_fru_veg_list 1 " consumed other fruits or vegetables :yes" 0 "consumed other fruits or vegetables :no"
+label val SMother_fru_veg SMother_fru_veg_list 
+label var SMother_fru_veg "infants who consumed other fruits or vegetables"
+
+tabout SMother_fru_veg [aw=SMFUweight] using "`COHORT'6M_Priority_indicator_Analysis$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title("Table 10. The proportion of  infants who are approximaltey 6 months of age who received other fruits or vegetables during the previous day") f(0 1) clab(n col_%) nwt(SMFUweight) sheet(Nutrition) location(100 1)
+
+* Table 11. Minimum Dietary Diversity (MDD); The proportion of  Children 6–12 months of age who received foods from ≥ 4 food groups during the previous day
 
 
+egen SMfood_group_consumed_no = rowtotal( SMgrain_roots_tuber SMlegumes_nut SMdiary SMflesh_food SMeggs SMvitaminA_rich_fruits SMother_fru_veg) if 	SMstill_alive1==1 | SMstill_alive2==1 & SMresult==1
 
+gen SM_mdd = 0 if SMstill_alive1==1 | SMstill_alive2==1 & SMresult==1
+replace SM_mdd=1 if SMfood_group_consumed_no >=4
+label define SM_mdd_list 1 "received morethan 4 food groups: yes " 0 "received morethan 4 food groups: no " 
+label val SM_mdd SM_mdd_list
+label var SM_mdd "infants who received more than 4 food groups"
 
+tabout SM_mdd [aw=SMFUweight] using "`COHORT'6M_Priority_indicator_Analysis$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title("Table 11. The proportion of  infants who are approximaltey 6 months of age who received received morethan 4 food groups during the previous day") f(0 1) clab(n col_%) nwt(SMFUweight) sheet(Nutrition) location(110 1)
 
+* Table 12. the proportion of infnats who whose complementary feeding initiated timely
 
+gen SMtimely_complemnet_feeding = 0 if SMstill_alive1==1 | SMstill_alive2==1 & SMresult==1
+replace SMtimely_complemnet_feeding==1 if SMage_begin_food1==6 |SMage_begin_food2==6
+label define SMtimely_complemnet_feeding_list 1"timely initiated comp.feeding:yes" 0 "timely initiated comp.feeding:no"
+label val SMtimely_complemnet_feeding SMtimely_complemnet_feeding_list
+label var SMtimely_complemnet_feeding " infants who started complementary feeding at 6 months of age"
 
-
-
-
+tabout SMtimely_complemnet_feeding [aw=SMFUweight] using "`COHORT'6M_Priority_indicator_Analysis$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title("Table 12. the proportion of infnats who whose complementary feeding initiated timely") f(0 1) clab(n col_%) nwt(SMFUweight) sheet(Nutrition) location(120 1)
