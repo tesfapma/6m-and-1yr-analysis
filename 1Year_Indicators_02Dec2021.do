@@ -203,87 +203,106 @@ tabout OYwho_attempt_removal[aw=OYFUweight] if OYwant_implant_removed==1 using "
 *   Sheet 4: COVID                          *
 *********************************************
 *Table 1: Percentage of mothers and caretakers who reported degree of awareness about the COVID otbreak.
-tabout OYcovid_knowledge[aw=OYFUweight]  using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table 1: Percentage of mothers and caretakers who reported degree of awareness about the COVID otbreak) f(0 1) clab(n col_%) nwt(OYFUweight) sheet(COVID) location(1 1)
+tabout OYcovid_knowledge[aw=OYFUweight]  using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table 1: Percentage of mothers and caretakers who reported degree of awareness about the COVID outbreak) f(0 1) clab(n col_%) nwt(OYFUweight) sheet(COVID) location(1 1)
 
-*Tabel 2: COVID awareness communication channel source (14 sources) 
-local i=11 
-foreach var in OYhow_learned_covid_news OYhow_learned_covid_radio OYhow_learned_covid_tv OYhow_learned_covid_poster OYhow_learned_covid_phone OYhow_learned_covid_ethio OYhow_learned_covid_family OYhow_learned_covid_friends OYhow_learned_covid_leaders  OYhow_learned_covid_hp OYhow_learned_covid_govt OYhow_learned_covid_school OYhow_learned_covid_other {
-	local `var'_lab : variable label `var'
+*Tabel 2: COVID awareness communication channel source *Percentage of mothers and caretakers with self reported awareness of COVID, who identified [Communication Channel] as their source of awareness.
+local i=10 
+foreach var in OYhow_learned_covid_news OYhow_learned_covid_radio OYhow_learned_covid_tv OYhow_learned_covid_poster OYhow_learned_covid_phone OYhow_learned_covid_ethio OYhow_learned_covid_family OYhow_learned_covid_friends OYhow_learned_covid_leaders OYhow_learned_covid_socialmedia OYhow_learned_covid_hp OYhow_learned_covid_govt OYhow_learned_covid_school OYhow_learned_covid_other {
+	local varlab : var label `var'
 	recode `var' (-99 . =0) 
-	tabout `var' [aw=OYFUweight] using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table X: `"`: var label `var''"') f(0 1) clab(n col_%) nwt(OYFUweight) sheet(COVID) location(`i' 1)
+	tabout `var' [aw=OYFUweight] if (OYcovid_knowledge==1|OYcovid_knowledge==2|OYcovid_knowledge==3) using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table 2X:COVID Awareness Source `"`: var label `var''"') f(0 1) clab(n col_%) nwt(OYFUweight) sheet(COVID) location(`i' 1)
 local i=`i'+7
 	}	
 
-tabout OYhow_learned_covid_socialmedia[aw=OYFUweight]  using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table X: Social Media) f(0 1) clab(n col_%) nwt(OYFUweight) sheet(COVID) location(102 1)
-
-*Trusted COVID Information Source
-local i=110 
-foreach var in OYcovid_trust_source_poster OYcovid_trust_source_phone OYcovid_trust_source_ethio OYcovid_trust_source_family OYcovid_trust_source_leaders OYcovid_trust_source_friends OYcovid_trust_source_socialmedia OYcovid_trust_source_hp OYcovid_trust_source_govt OYcovid_trust_source_school OYcovid_trust_source_other {
-	local `var' : variable label `var'
+* Tabel 3:Trusted COVID Information Source
+*Percentage of mothers and caretakers with self reported awareness of COVID, who identified [Communication Channel] as their trusted source of awareness.
+local i=108 
+foreach var in OYcovid_trust_source_news OYcovid_trust_source_radio OYcovid_trust_source_tv OYcovid_trust_source_poster OYcovid_trust_source_phone OYcovid_trust_source_ethio OYcovid_trust_source_family OYcovid_trust_source_friends OYcovid_trust_source_leaders OYcovid_trust_source_socialmedia OYcovid_trust_source_hp OYcovid_trust_source_govt OYcovid_trust_source_school OYcovid_trust_source_other {
+	local varlab : var label `var'
 	recode `var' (-99 . =0) 
-	tabout `var' [aw=OYFUweight] using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table X: `"`: var label `var''"') f(0 1) clab(n col_%) nwt(OYFUweight) sheet(COVID) location(`i' 1)
+	tabout `var' [aw=OYFUweight] if (OYcovid_knowledge==1|OYcovid_knowledge==2|OYcovid_knowledge==3) using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table 3X:Trusted COVID Information Source `"`: var label `var''"') f(0 1) clab(n col_%) nwt(OYFUweight) sheet(COVID) location(`i' 1)
 local i=`i'+7
 	}	
 
-exit
-	
-tabout OYcovid_trust_source_leaders[aw=OYFUweight]  using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table X: Social Media) f(0 1) clab(n col_%) nwt(OYFUweight) sheet(COVID) location(180 1)
-	
-tabout OYcovid_trust_source_friends[aw=OYFUweight]  using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table X: Social Media) f(0 1) clab(n col_%) nwt(OYFUweight) sheet(COVID) location(187 1)
-
-tabout OYcovid_trust_source_socialmedia[aw=OYFUweight]  using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table X: Social Media) f(0 1) clab(n col_%) nwt(OYFUweight) sheet(COVID) location(194 1)
-
-* COVID Community Risk Perception (Concern)
-
+* Table 4: COVID Community Risk Perception (Concern)
 recode OYcommunity_spread_concern (.=0)
+tabout OYcommunity_spread_concern[aw=OYFUweight] if (OYcovid_knowledge==1|OYcovid_knowledge==2|OYcovid_knowledge==3) using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table 4: Percentage of mothers and caretakers with some awareness of COVID, who reported concern of COVID spread in their community.) f(0 1) clab(n col_%) nwt(OYFUweight) sheet(COVID) location(206 1)
 
-tabout OYcommunity_spread_concern[aw=OYFUweight]  using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table X: COVID Community Risk Perception (Concern)) f(0 1) clab(n col_%) nwt(OYFUweight) sheet(COVID) location(202 1)
-
-*COVID Self Risk Perception (Concern)
+*Table 5: COVID Self Risk Perception (Concern)
  recode OYself_covid_concern (.=0)
- tabout OYself_covid_concern [aw=OYFUweight]  using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table X: COVID Self Risk Perception (Concern)) f(0 1) clab(n col_%) nwt(OYFUweight) sheet(COVID) location(213 1)
+ tabout OYself_covid_concern [aw=OYFUweight] if (OYcovid_knowledge==1|OYcovid_knowledge==2|OYcovid_knowledge==3) using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table 5: Percentage of mothers and caretakers with some awareness of COVID, who reported concern of getting COVID.) f(0 1) clab(n col_%) nwt(OYFUweight) sheet(COVID) location(216 1)
  
-*COVID Prevention Practice
+* Table 6: COVID Prevention Practice
 recode OYable_to_distance (-99 .=0)
-tabout OYable_to_distance[aw=OYFUweight]  using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table X: COVID Prevention Practice) f(0 1) clab(n col_%) nwt(OYFUweight) sheet(COVID) location(225 1)
+tabout OYable_to_distance[aw=OYFUweight] if (OYcovid_knowledge==1|OYcovid_knowledge==2|OYcovid_knowledge==3) using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table 6: Percentage of mothers and caretakers with self reported awareness of COVID, who reported avoiding contact with non household persons to prevent getting COVID.) f(0 1) clab(n col_%) nwt(OYFUweight) sheet(COVID) location(227 1)
 
-*Reason for non practice of COVID prevention
-local i=233 
+*Table 7: Reason for non practice of COVID prevention
+local i=235 
 foreach var in  OYwhy_unable_to_distance_job OYwhy_unable_to_distance_market OYwhy_unable_to_distance_water OYwhy_unable_to_distance_school OYwhy_unable_to_distance_funeral OYwhy_unable_to_distance_church OYwhy_unable_to_distance_visit OYwhy_unable_to_distance_health OYwhy_unable_to_distance_other {
-	local `var' : variable label `var'
+	local varlab : var label `var'
 	recode `var' (-99 . =0) 
-	tabout `var' [aw=OYFUweight] using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table X: `"`: var label `var''"') f(0 1) clab(n col_%) nwt(OYFUweight) sheet(COVID) location(`i' 1)
+	tabout `var' [aw=OYFUweight] using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table 7X:Reason for non practice of COVID prevention `"`: var label `var''"') f(0 1) clab(n col_%) nwt(OYFUweight) sheet(COVID) location(`i' 1)
 local i=`i'+7
 	}	
 
-*Household Level COVID Economic Effect
+*Table 8: Household Level COVID Economic Effect
 gen COVID_Eco_effect=0 
 replace COVID_Eco_effect=1 if OYhousehold_income_loss==2 | OYhousehold_income_loss==3
 label define COVID_Eco_effectlist 0 "Not Change" 1 "Partial/Complete"
 label val COVID_Eco_effect COVID_Eco_effectlist
+label var COVID_Eco_effect "Household Level COVID Economic Effect"
 
-tabout  COVID_Eco_effect [aw=OYFUweight]  using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table X: COVID Prevention Practice) f(0 1) clab(n col_%) nwt(OYFUweight) sheet(COVID) location(296 1)
+tabout  COVID_Eco_effect [aw=OYFUweight]  using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table 8: Percentage of mothers and caretakers who reported partial or complete loss of income to their household due to COVID otbreak.) f(0 1) clab(n col_%) nwt(OYFUweight) sheet(COVID) location(298 1)
 
-*Individual Level COVID Economic Effect (For Partially affected HH)
-tabout OYself_income_loss [aw=OYFUweight] if OYhousehold_income_loss==2  using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table X:Individual Level COVID Economic Effect (For Partially affected HH)) f(0 1) clab(n col_%) nwt(OYFUweight) sheet(COVID) location(304 1)
+*Table 9: Individual Level COVID Economic Effect (For Partially affected HH)
+tabout OYself_income_loss [aw=OYFUweight] if OYhousehold_income_loss==2  using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table 9:Percentage of mothers and caretakers who reported some level of personal loss of income due to COVID otbreak) f(0 1) clab(n col_%) nwt(OYFUweight) sheet(COVID) location(306 1)
 
-*Households with No Food Due to COVID
+*Table 10: Households with No Food Due to COVID
 recode OYlack_food_4wks (-88=0)
-tabout OYlack_food_4wks [aw=OYFUweight]  using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table X:Households with No Food Due to COVID) f(0 1) clab(n col_%) nwt(OYFUweight) sheet(COVID) location(315 1)
+tabout OYlack_food_4wks [aw=OYFUweight]  using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table 10:Percentage of women who reported themselves or a member of family to eat nothing for a day due to COVID otbreak) f(0 1) clab(n col_%) nwt(OYFUweight) sheet(COVID) location(316 1)
 
-*Frequency of No Food Due to COVID
-tabout OYlack_food_frequency [aw=OYFUweight] if OYlack_food_4wks==1 using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table X:Households with No Food Due to COVID) f(0 1) clab(n col_%) nwt(OYFUweight) sheet(COVID) location(324 1)
+*Table 11: Frequency of No Food Due to COVID
+tabout OYlack_food_frequency [aw=OYFUweight] if OYlack_food_4wks==1 using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table 11:Percentage of women with no food who reported such lack of food [Rarely/Sometimes/Often] in a month) f(0 1) clab(n col_%) nwt(OYFUweight) sheet(COVID) location(324 1)
+*Table 12: COVID Effect on Childhood Vaccination
 
-*COVID Effect on Childhood Vaccination
-
-* Type of Difficulties on Childhood Vaccination Due to COVID
-
-*Missed Childhood Vaccination Due to COVID
-
-*COVID Effect on Sick Child Health Care
+*Table 13:
 
 
+*Table 14:
 
+
+*Table 15:
+
+
+*Table 16:
+
+
+*Table 17:Percentage of postpartum women, who experienced difficulties of getting postnatal care during COVID pandemic.
+recode OYpnc_access_diff_yn (-88=0)
+OYpnc_access_diff_yn
+
+
+*Table 18:Percentage of mothers and caretakers who experienced difficulties of PNC service 
+OYpnc_diff_closed OYpnc_diff_nohew OYpnc_diff_husbopp OYpnc_diff_notransport OYpnc_diff_govt OYpnc_diff_cost OYpnc_diff_fearinfect OYpnc_diff_interrupt OYpnc_diff_other
+
+*Table 19: Percentage of postpartum women whose fertility preference is affected by COVID pandemic
+ OYcovid19_more_child
+
+*Table 20: Percentage of postpartum women whose pregnancy spacing preference is affected by COVID pandemic
+OYcovid19_impact_wait
+
+**Table 21:Percentage of postpartum women whose pregnancy spacing preference is [Shorter/longer] than before due to COVID pandemic
+tabout OYsooner_later [aw=OYFUweight] if OYcovid19_impact_wait==1 using "`COHORT'_1Y_Priority_Analysis_$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title(Table 21:Percentage of postpartum women whose pregnancy spacing preference is [Shorter/longer] than before due to COVID pandemic) f(0 1) clab(n col_%) nwt(OYFUweight) sheet(COVID) location(324 1)
+
+*Table 22:Percentage of postpartum women who used emergency contraception during COVID pandemic
+ OYcovid_ec_used
+ 
+*Table 23:Percentage of postpartum women, who experienced difficulties of accessing FP services during COVID pandemic
+recode OYfp_access_diff_yn (-88=3)
+ OYfp_access_diff_yn
+ 
+*Table 24:Percentage of postpartum women who experienced difficulties of accessing FP service
+OYfp_diff_closed OYfp_diff_nohew OYfp_diff_husbopp OYfp_diff_cost OYfp_diff_notransport OYfp_diff_prfnotavail OYfp_diff_worrynostaff OYfp_diff_govt OYfp_diff_fearinfect OYfp_diff_other
 *********************************************
 *   Sheet 5: PNC                            *
 *********************************************
