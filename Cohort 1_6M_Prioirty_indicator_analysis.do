@@ -382,7 +382,6 @@ local row=`row'+8
  
 * Table 15: The proportion of women who have got any family planning informaiton, referrals or services at a time of visit for health check or immunization
 
-
 gen SMfp_sevice_integration=0 if SMvaccines_yn1==1 |SMmother_baby_check_yn==1 & (SMresult==1)
 replace SMfp_sevice_integration=1 if SMfp_info_non_vaccine_visit==1 |SMfp_info_vaccine_visit==1
 
@@ -392,15 +391,12 @@ label var SMfp_sevice_integration " Women who received any family planning infor
 
 tabout SMfp_sevice_integration [aw=SMFUweight] using "`COHORT'6M_Priority_indicator_Analysis$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title("Table 15 :women who have got any family planning informaiton, referrals or services at a time of visit for health check or immunization") f(0 1) clab(n col_%) nwt(SMFUweight) sheet(FP_RH) location(190 1)
 
-
 * Table 16:The proportion of women who were told about the side effects of the current method she is using
-
 tabout SMfp_side_effects [aw=SMFUweight] if SMcurrent_user==1 using "`COHORT'6M_Priority_indicator_Analysis$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title("Table 16:The proportion of women who were told about the side effects of the current method she is using") f(0 1) clab(n col_%) nwt(SMFUweight) sheet(FP_RH) location(200 1)
 
  * Table 17: The percentage of women who are current user and experienced side effects 
 tabout SMcur_sideeff_yn [aw=SMFUweight] if SMcurrent_user==1 using "`COHORT'6M_Priority_indicator_Analysis$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title("Table 17: The percentage of women who are current user and experienced side effects ") f(0 1) clab(n col_%) nwt(SMFUweight) sheet(FP_RH) location(210 1)
  
-
 * table 18: Fp side effects: 
 local row=220
 foreach var in SMcur_sideeff_lessbleed SMcur_sideeff_morebleed SMcur_sideeff_irregbleed SMcur_sideeff_abpain SMcur_sideeff_gainweight SMcur_sideeff_loseweight SMcur_sideeff_acne SMcur_sideeff_headache SMcur_sideeff_infection SMcur_sideeff_nausea SMcur_sideeff_menscramp SMcur_sideeff_lowersex SMcur_sideeff_lesspleasure SMcur_sideeff_vagdry SMcur_sideeff_weakness SMcur_sideeff_diarrhea SMcur_sideeff_partner SMcur_sideeff_insertpain SMcur_sideeff_mood SMcur_sideeff_back SMcur_sideeff_other {
@@ -411,12 +407,8 @@ preserve
  tabout `var'[aw=SMFUweight] if SMresult==1 using "`COHORT'6M_Priority_indicator_Analysis$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title("Table 18. Fp side effect: `varlab' ") f(0 1) clab(n col_%) nwt(SMFUweight) sheet(FP_RH) location(`row' 1)
  
  restore
- 
 local row=`row'+8
-
-
 }
-
 
 *Table 19. Percentage of women whose menses returned and who have resumed sexual intercourse 
 
@@ -706,11 +698,31 @@ tabout SMdiarrhea_blood [aw=SMFUweight] using "`COHORT'6M_Priority_indicator_Ana
 
 tabout SMdiarrhea_trt_yn [aw=SMFUweight] using "`COHORT'6M_Priority_indicator_Analysis$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title("Table 10. The Proportion of women who sought treatment or visited by Health worker at home for her child's diarrhea") f(0 1) clab(n col_%) nwt(SMFUweight) sheet(Infant) location(90 1)
 
-* Table 11.
+* Table 11. The Proportion of alive infants with diarrhoea who got ORS for the diarrhoea
+  gen SMors_trt_diarrhea =0 if SMill_diarrhea==1
+  replace if SMors_trt_diarrhea==1 if SMdiarrhea_trt_orsathome==1 | SMdiarrhea_trt_orsinfacility==1
+  label define SMors_trt_diarrhea_list 1"Infants who received ORS treatment:yes"   0"Infants who received ORS treatment:yes"
+  label val SMors_trt_diarrhea SMors_trt_diarrhea_list 
+  label var SMors_trt_diarrhea "infants who received ORS treatment at home or at the facility"
+ 
+ tabout SMors_trt_diarrhea [aw=SMFUweight] using "`COHORT'6M_Priority_indicator_Analysis$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title("Table 11. The Proportion of alive infants with diarrhoea who got ORS for the diarrhoea") f(0 1) clab(n col_%) nwt(SMFUweight) sheet(Infant) location(100 1)
 
-* Tabel 12.
+* Tabel 12. Proportion of infants who suffer from diarrhoea and received Zinc treatment 
+tabout SMdiarrhea_trt_zinctabs [aw=SMFUweight] using "`COHORT'6M_Priority_indicator_Analysis$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title("* Tabel 12. Proportion of infants who suffer from diarrhoea and received Zinc treatment") f(0 1) clab(n col_%) nwt(SMFUweight) sheet(Infant) location(110 1)
 
- * Table 13. 
+ * Table 13. The Proportion of infants who suffer from diarrhoea and received ORS and Zinc treatment
+ 
+ gen SMzinc_ors_trt =0 if SMill_diarrhea==1
+ replace SMzinc_ors_trt=1 if SMors_trt_diarrhea==1 & SMdiarrhea_trt_zinctabs 
+ label define SMzinc_ors_trt_list   1"got zinc and ORS: yes" 1"got zinc and ORS: no"
+ label val SMzinc_ors_trt SMzinc_ors_trt_list
+ label var SMzinc_ors_trt "infants who suffer from diarrhea who got zinc and ORS treatment"
+ 
+tabout SMzinc_ors_trt [aw=SMFUweight] using "`COHORT'6M_Priority_indicator_Analysis$date.xlsx", append style(xlsx) font(bold) fsize(12) c(freq col) title("Table 13. The Proportion of infants who suffer from diarrhoea and received ORS and Zinc treatment") f(0 1) clab(n col_%) nwt(SMFUweight) sheet(Infant) location(120 1)
+
+ 
+ restore 
+ 
 
 
 
